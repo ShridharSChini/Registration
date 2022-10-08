@@ -40,13 +40,13 @@ export_as_pdf = st.button("Export Report")
 
 class PDF(FPDF):
     def header(self):
-        # header_path = Path(__file__).parent / "header.png"
+        header_path = Path(__file__).parent / "header.png"
         # st.write(header_path)
-        self.image("C:\\Users\\ISE\\TimeTable\\header.png", 0, 0, 200)
+        self.image(header_path, 0, 0, 200)
     
     def footer(self):
-        # footer_path = Path(__file__).parent / "dept_body.png"
-        self.image("C:\\Users\\ISE\\TimeTable\\dept_body.png", 20, 210, 170)
+        footer_path = Path(__file__).parent / "dept_body.png"
+        self.image(footer_path", 20, 210, 170)
 
 def create_download_link(val, filename):
     b64 = base64.b64encode(val)  # val looks like b'...'
