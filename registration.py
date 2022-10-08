@@ -1,4 +1,4 @@
-from fpdf import FPDF
+from fpdf2 import FPDF
 import streamlit as st
 import base64
 from pathlib import Path
