@@ -46,7 +46,7 @@ class PDF(FPDF):
     
     def footer(self):
         footer_path = Path(__file__).parent / "dept_body.png"
-        self.image(footer_path", 20, 210, 170)
+        self.image(footer_path, 20, 210, 170)
 
 def create_download_link(val, filename):
     b64 = base64.b64encode(val)  # val looks like b'...'
