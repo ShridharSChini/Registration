@@ -3,12 +3,15 @@ import streamlit as st
 import base64
 from pathlib import Path
 import num2words
+import datetime
 
-year=['selecct the year','I','II','III','IV']
+year=['select the year','I','II','III','IV']
 quota = ['Management','COMEDK','CET','SNQ','GOI']
 category = ['SC','ST','OBC','GM']
 sought = ['B.E.', ' M.Tech.',' M.C.A.']
 
+# st.header('REGISTRATION FORM')
+st.markdown("<h1 style='text-align: center; color: black;'>REGISTRATION FORM</h1>", unsafe_allow_html=True)
 admission_sought = st.selectbox('Admission Sought',sought)
 Name = st.text_input('Full Name')
 usn = st.text_input('USN')
@@ -33,6 +36,7 @@ fee_paid = st.number_input('Fees Paid for Cur. Academic Year: Rs.: ')
 
 fee_pending_words = num2words.num2words((fee_pending), lang='en_IN')
 fee_paid_words = num2words.num2words((fee_paid), lang='en_IN')
+fee_paid_date = st.date_input("Date of fee payment",datetime.date(2022, 7, 22))
 
 export_as_pdf = st.button("Export Report")
 
@@ -70,7 +74,9 @@ if export_as_pdf:
     pdf.ln(line_height)
 
     pdf.multi_cell(col_width, line_height, "Admission Sought", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
-    pdf.multi_cell(col_width, line_height, admission_sought, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    pdf.set_font("Times", size=12)
+    pdf.multi_cell(col_width * 4, line_height, admission_sought+"  -  "+ branch, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    pdf.set_font('Arial', 'B', 11)
     pdf.ln(line_height)
 
     pdf.multi_cell(col_width/1.5, line_height, "Name in Full:", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
@@ -83,13 +89,13 @@ if export_as_pdf:
     pdf.set_font('Arial', 'B', 11)
     pdf.ln(line_height)
 
-    pdf.multi_cell(col_width/1.5, line_height, "Branch:", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
-    pdf.set_font("Times", size=12)
-    pdf.multi_cell(col_width*1.5, line_height, branch, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
-    pdf.set_font('Arial', 'B', 11)
+    # pdf.multi_cell(col_width/1.5, line_height, "Branch:", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    # pdf.set_font("Times", size=12)
+    # pdf.multi_cell(col_width*1.5, line_height, branch, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    # pdf.set_font('Arial', 'B', 11)
     pdf.multi_cell(col_width/1.5, line_height, "Email:", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.set_font("Times", size=12)
-    pdf.multi_cell(col_width *1.75, line_height, Email, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    pdf.multi_cell(col_width *2, line_height, Email, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.set_font('Arial', 'B', 11)
     pdf.ln(line_height)
 
@@ -141,7 +147,7 @@ if export_as_pdf:
     pdf.ln(line_height)
 
     pdf.set_font('Arial', 'B', 11)
-    pdf.multi_cell(col_width *3, line_height * 0.2, "Fees Paid for Current Academic Year Rs.: "+ str(fee_paid), border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    pdf.multi_cell(col_width *3, line_height * 0.2, "Fees Paid for Current Academic Year Rs.: "+ str(fee_paid) + "  on  "+ str(fee_paid_date), border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.ln(line_height)
 
     pdf.set_font("Times", size=12)
