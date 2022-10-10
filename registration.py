@@ -10,6 +10,7 @@ quota = ['Management','COMEDK','CET','SNQ','GOI']
 category = ['SC','ST','OBC','GM']
 sought = ['B.E.', ' M.Tech.',' M.C.A.']
 
+st.set_page_config(page_title="REGISTRATION FORM",page_icon='🖊️')
 # st.header('REGISTRATION FORM')
 st.markdown("<h1 style='text-align: center; color: black;'>REGISTRATION FORM</h1>", unsafe_allow_html=True)
 admission_sought = st.selectbox('Admission Sought',sought)
