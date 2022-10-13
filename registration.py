@@ -9,6 +9,9 @@ year=['select the year','I','II','III','IV']
 quota = ['Management','COMEDK','CET','SNQ','GOI']
 category = ['SC','ST','OBC','GM']
 sought = ['B.E.', ' M.Tech.',' M.C.A.']
+branch_li = ['Select your branch','CSE - Computer Science and Engineering','ECE - Electronics and Communication Engineering',
+'EEE - Electrical and Electronics Engineering','CIV - Civil Engineering','MEC - Mechanical Engineering',
+'MCA - Master of Computer Application']
 
 st.set_page_config(page_title="REGISTRATION FORM",page_icon='🖊️')
 # st.header('REGISTRATION FORM')
@@ -16,7 +19,7 @@ st.markdown("<h1 style='text-align: center; color: black;'>REGISTRATION FORM</h1
 admission_sought = st.selectbox('Admission Sought',sought)
 Name = st.text_input('Full Name')
 usn = st.text_input('USN')
-branch = st.text_input('Branch')
+branch = st.selectbox('Branch:',branch_li)
 Email = st.text_input('Email : ')
 
 Ph_number = st.text_input('Mobile No.')
@@ -80,7 +83,7 @@ if export_as_pdf:
 
     pdf.multi_cell(col_width, line_height, "Admission Sought", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.set_font("Times", size=12)
-    pdf.multi_cell(col_width * 4, line_height, admission_sought+"  -  "+ branch, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+    pdf.multi_cell(col_width * 4, line_height, admission_sought+"   "+ branch, border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.set_font('Arial', 'B', 11)
     pdf.ln(line_height)
 
