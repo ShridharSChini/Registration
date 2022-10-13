@@ -39,6 +39,10 @@ fee_pending_words = num2words.num2words((fee_pending), lang='en_IN')
 fee_paid_words = num2words.num2words((fee_paid), lang='en_IN')
 fee_paid_date = st.date_input("Date of fee payment",datetime.date(2022, 7, 22))
 
+uploaded_file = st.file_uploader('Upload receipt in .jpg/png Format', type=['png', 'jpg'])
+if uploaded_file is not None:
+    st.write('uploaded successfully  ')
+
 export_as_pdf = st.button("Export Report")
 
 
@@ -49,9 +53,9 @@ class PDF(FPDF):
         # st.write(header_path)
         self.image(header_path, 0, 0, 200)
     
-    def footer(self):
-        footer_path = Path(__file__).parent / "dept_body.png"
-        self.image(footer_path, 20, 210, 170)
+    # def footer(self):
+    #     footer_path = Path(__file__).parent / "dept_body.png"
+    #     self.image(footer_path, 20, 210, 170)
 
 def create_download_link(val, filename):
     b64 = base64.b64encode(val)  # val looks like b'...'
@@ -164,6 +168,12 @@ if export_as_pdf:
     pdf.multi_cell(col_width *2, line_height * 0.1, "(Signature of the Student)", border=0,new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
     pdf.ln(line_height)
 
+    footer_path = Path(__file__).parent / "dept_body.png"
+    pdf.image(footer_path, 20, 210, 170)
+
+    pdf.ln(line_height *3.5)
+    pdf.add_page()
+    pdf.image(uploaded_file,10,30,col_width * 5,150)
+
     html = create_download_link(pdf.output(), "registration_form")
     st.markdown(html, unsafe_allow_html=True)
-#82,80,78
