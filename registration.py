@@ -176,7 +176,7 @@ if export_as_pdf:
 
     pdf.ln(line_height *3.5)
     pdf.add_page()
-    pdf.image(uploaded_file,10,30,col_width * 5,150)
+    pdf.image(uploaded_file,10,30,col_width * 4,150)
 
     html = create_download_link(pdf.output(), "registration_form")
     st.markdown(html, unsafe_allow_html=True)
